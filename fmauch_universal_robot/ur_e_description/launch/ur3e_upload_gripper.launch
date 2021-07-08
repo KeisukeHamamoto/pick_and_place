@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  
+  <param  name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find ur_e_description)/urdf/ur3e_connect_gripper.urdf.xacro'
+      "
+  />
+ 
+</launch>

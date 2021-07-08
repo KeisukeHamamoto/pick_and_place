@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="pedestal" params="parent *joint_origin">
+        <material name="green">
+            <color rgba="0.0 1.0 0.0 1.0"/>
+        </material>
+
+        <joint name="pedestal_joint" type="fixed">
+            <xacro:insert_block name="joint_origin"/>
+            <parent link="${parent}"/>
+            <child link="pedestal_link"/>
+        </joint>
+
+        <link name="pedestal_link">
+            <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <mass value="44.391"/>
+                <inertia ixx="3.739" ixy="0.0" ixz="1.393e-10" iyy="3.739" iyz="0.0" izz="0.08"/>
+            </inertial>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <cylinder radius="0.06" length="0.5"/>
+                </geometry>
+                <material name="green"/>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <cylinder radius="0.06" length="0.5"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <gazebo reference="pedestal_link">
+            <material>Gazebo/Green</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

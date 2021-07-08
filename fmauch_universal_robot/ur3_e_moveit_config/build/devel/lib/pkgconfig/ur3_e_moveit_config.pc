@@ -1,0 +1,8 @@
+prefix=/home/tsuchida/ros_package/ur_ws/src/fmauch_universal_robot/ur3_e_moveit_config/build/devel
+
+Name: ur3_e_moveit_config
+Description: Description of ur3_e_moveit_config
+Version: 1.2.5
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,37 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/tsuchida/ros_package/ur_ws/devel/include",
+                "/home/tsuchida/ros_package/nishida_ws/devel/include",
+                "/home/tsuchida/ros_package/catkin_ws/devel/include",
+                "/opt/ros/melodic/include",
+                "/home/tsuchida/ros_package/ur_ws/src/Universal_Robots_ROS_Driver/controller_stopper/include",
+                "/home/tsuchida/ros_package/ur_ws/src/ur5_with_robotiq_gripper/icl_robotiq_2f_gripper_action_server/include",
+                "/home/tsuchida/ros_package/ur_ws/src/moveit_jog_arm/include",
+                "/home/tsuchida/ros_package/ur_ws/src/robotiq/robotiq_2f_gripper_action_server/include",
+                "/home/tsuchida/ros_package/ur_ws/src/robotiq/robotiq_2f_gripper_control/include",
+                "/home/tsuchida/ros_package/ur_ws/src/robotiq/robotiq_3f_gripper_articulated_gazebo_plugins/include",
+                "/home/tsuchida/ros_package/ur_ws/src/robotiq/robotiq_3f_gripper_control/include",
+                "/home/tsuchida/ros_package/ur_ws/src/robotiq/robotiq_ethercat/include",
+                "/home/tsuchida/ros_package/ur_ws/src/robotiq/robotiq_ft_sensor/include",
+                "/home/tsuchida/ros_package/ur_ws/src/Universal_Robots_ROS_Driver/ur_calibration/include",
+                "/home/tsuchida/ros_package/ur_ws/src/Universal_Robots_ROS_Driver/ur_controllers/include",
+                "/home/tsuchida/ros_package/ur_ws/src/fmauch_universal_robot/ur_kinematics/include",
+                "/home/tsuchida/ros_package/ur_ws/src/Universal_Robots_ROS_Driver/ur_robot_driver/include",
+                "/home/tsuchida/ros_package/ur_ws/src/visp_ros/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}

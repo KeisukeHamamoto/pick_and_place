@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="ur3" >
+
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+  <!-- common stuff -->
+  <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+
+  <!-- ur3 -->
+  <xacro:include filename="$(find ur_description)/urdf/ur3.urdf.xacro" />
+
+  <!-- arm -->
+  <xacro:arg name="kinematics_config" default="$(find ur_description)/config/ur3_default.yaml"/>
+  <xacro:ur3_robot prefix="" joint_limited="true"
+    shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
+    shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
+    elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
+    wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
+    wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
+    wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    kinematics_file="${load_yaml('$(arg kinematics_config)')}"
+  />
+  <link name="world"/>
+  <joint name="ur_base_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
+    <parent link="pedestal_link"/>
+    <child link="base_link"/>
+  </joint>
+
+  <xacro:include filename="$(find pick_and_place)/urdf/redbox.urdf.xacro"/>
+  <xacro:include filename="$(find pick_and_place)/urdf/camera.urdf.xacro"/>
+  <xacro:include filename="$(find pick_and_place)/urdf/pedestal.urdf.xacro"/>
+  <xacro:include filename="$(find pick_and_place)/urdf/desk.urdf.xacro"/>
+  <xacro:include filename="$(find pick_and_place)/urdf/bin.urdf.xacro"/>
+  
+  
+  <xacro:red_box parent="desk_link">
+    <origin xyz="0.1 0.1 0.4"/>
+  </xacro:red_box>
+
+  <xacro:camera parent="world">
+    <origin xyz="0.2 0.0 2.0" rpy="0.0 ${pi/2} ${pi/2}"/>
+  </xacro:camera>
+
+  <xacro:pedestal parent="world">
+    <origin xyz="0.0 0.0 0.25"/>
+  </xacro:pedestal>
+
+  <xacro:desk parent="world">
+    <origin xyz="0.3 0.0 0.0"/>
+  </xacro:desk>
+
+  <xacro:bin parent="world">
+    <origin xyz="0.0 0.6 0.0"/>
+  </xacro:bin>
+  </robot>

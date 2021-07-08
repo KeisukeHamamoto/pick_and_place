@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot name='desk'>
+        <material name="green">
+            <color rgba="0.0 1.0 0.0 1.0"/>
+        </material>
+        <link name="world"/>
+        <joint name="desk_joint" type="fixed">
+            <parent link="world"/>
+            <child link="desk_link"/>
+        </joint>
+
+        <link name="desk_link">
+            <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <mass value="14.44"/>
+                <inertia ixx="1.801" ixy="0.0" ixz="0.0" iyy="1.801" iyz="0.0" izz="0.465"/>
+            </inertial>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://pick_and_place/stl/desk.stl"/>
+                </geometry>
+                <material name="green"/>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://pick_and_place/stl/desk.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <gazebo reference="desk_link">
+            <mu1>10</mu1>
+            <mu2>10</mu2>
+            <material>Gazebo/Green</material>
+        </gazebo>
+</robot>

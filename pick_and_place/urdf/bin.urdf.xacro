@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="bin" params="parent *joint_origin">
+        <material name="blue">
+            <color rgba="0.0 0.0 1.0 1.0"/>
+        </material>
+
+        <joint name="bin_joint" type="fixed">
+            <xacro:insert_block name="joint_origin"/>
+            <parent link="${parent}"/>
+            <child link="bin_link"/>
+        </joint>
+
+        <link name="bin_link">
+            <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <mass value="6.614"/>
+                <inertia ixx="0.098" ixy="0.0" ixz="0.0" iyy="0.098" iyz="0.0" izz="0.123"/>
+            </inertial>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://pick_and_place/stl/bin.stl"/>
+                </geometry>
+                <material name="blue"/>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://pick_and_place/stl/bin.stl"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <gazebo reference="bin_link">
+            <mu1>10</mu1>
+            <mu2>10</mu2>
+            <material>Gazebo/Blue</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

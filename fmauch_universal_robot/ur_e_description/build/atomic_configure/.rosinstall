@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/tsuchida/ros_package/ur_ws/src/fmauch_universal_robot/ur_e_description/build/devel/setup.sh
