@@ -8,12 +8,16 @@
 #include <moveit/moveit_cpp/moveit_cpp.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <geometry_msgs/Point.h>
+#include <trajectory_msgs/JointTrajectory.h>
+#include <trajectory_msgs/JointTrajectoryPoint.h>
+#include <moveit_msgs/Grasp.h>
 
-
+#define PI 3.1415
 class manipulator_node
 {
 public:
     void move_point(const geometry_msgs::Point::ConstPtr& image_point);
+    void move_start();
     manipulator_node(std::string);
     moveit::planning_interface::MoveGroupInterface *move_group;
     geometry_msgs::Point box_point;

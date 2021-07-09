@@ -1,29 +1,31 @@
 {
-  "configurations": [
-    {
-      "browse": {
-        "databaseFilename": "",
-        "limitSymbolsToIncludedHeaders": true
-      },
-      "includePath": [
-        "/home/keisuke/pick_and_place/devel/include/**",
-        "/opt/ros/noetic/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/controller_stopper/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/pick_and_place/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_2f_gripper_action_server/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_2f_gripper_control/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_3f_gripper_articulated_gazebo_plugins/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_3f_gripper_control/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_ethercat/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_ft_sensor/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_calibration/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_controllers/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/fmauch_universal_robot/ur_kinematics/include/**",
-        "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
-        "/usr/include/**"
-      ],
-      "name": "ROS"
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/keisuke/pick_and_place/devel/include/**",
+                "/opt/ros/noetic/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/controller_stopper/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/pick_and_place/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_2f_gripper_action_server/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_2f_gripper_control/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_3f_gripper_articulated_gazebo_plugins/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_3f_gripper_control/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_ethercat/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/robotiq/robotiq_ft_sensor/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_calibration/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_controllers/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/fmauch_universal_robot/ur_kinematics/include/**",
+                "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
+                "/usr/include/**",
+                "/opt/ros/noetic/include",
+                "/usr/include/eigen3"
+            ],
+            "name": "ROS"
+        }
+    ],
+    "version": 4
 }
