@@ -16,8 +16,8 @@
     <arg name="limited" value="$(arg limited)"/>
   </include>
 
-  <rosparam file="$(find pick_and_place)/config/ur3e_gripper.yaml" command="load"/>
-    <node pkg="controller_manager" type="controller_manager" name="ros_controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper"/>
+  <!-- <rosparam file="$(find pick_and_place)/config/ur3e_gripper.yaml" command="load"/>
+    <node pkg="controller_manager" type="controller_manager" name="ros_controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper"/> -->
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot" respawn="false" output="screen" />
@@ -25,8 +25,10 @@
   <include file="$(find ur_gazebo)/launch/controller_utils.launch"/>
 
   <!-- start this controller -->
-  <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur3.yaml" command="load"/>
-  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+  <!-- <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur3.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/> -->
+  <rosparam file="$(find pick_and_place)/config/ur3e_gripper.yaml" command="load"/>
+  <node pkg="controller_manager" type="controller_manager" name="ros_controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper"/>
 
   <!-- load other controllers -->
   <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller" />
@@ -40,6 +42,6 @@
   <!-- spawn the desk in gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" name="desk" args="-file $(find pick_and_place)/urdf/desk_v2.urdf.xacro -urdf -model desk -x 0.3 -y 0.0 -z 0.0"/>
   <!-- spawn the redbox in gazebo -->
-  <node pkg="gazebo_ros" type="spawn_model" name="redbox" args="-file $(find pick_and_place)/urdf/redbox_v2.urdf.xacro -urdf -model redbox -x 0.3 -y -0.1 -z 0.5"/>
+  <node pkg="gazebo_ros" type="spawn_model" name="redbox" args="-file $(find pick_and_place)/urdf/redbox_v2.urdf.xacro -urdf -model redbox -x 0.4 -y -0.1 -z 0.5"/>
 
 </launch>

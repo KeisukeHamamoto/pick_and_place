@@ -161,7 +161,7 @@ void camera_node::pixel_to_world(cv::Point2f pixcel)
     ROS_INFO_STREAM("world.x:" << camera_to_world[0][0] << "world.y:" << camera_to_world[1][0] << "world.z:" << camera_to_world[2][0]);
     float i_x = camera_to_world[0][0];
     float i_y = camera_to_world[1][0];
-    float i_z = camera_to_world[2][0] + 0.5;
+    float i_z = camera_to_world[2][0] + 0.3;
 
     image_point.x = i_x;
     image_point.y = i_y;

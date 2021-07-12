@@ -9,5 +9,7 @@
         <param name="image_topic_name" value="$(arg image_topic_name)"/>
         <param name="output_topic_name" value="$(arg output_topic_name)"/>
     </node>
-    
+    <node pkg="pick_and_place" type="pick_and_place" name="pick_and_place" output="screen">
+        
+    </node>
 </launch>

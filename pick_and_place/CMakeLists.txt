@@ -229,3 +229,8 @@ add_executable(sub src/sub.cpp)
 target_link_libraries(sub
     ${catkin_LIBRARIES}
 )
+
+add_executable(arm_test src/arm_test_class.cpp src/arm_test.cpp)
+target_link_libraries(arm_test
+    ${catkin_LIBRARIES}
+)

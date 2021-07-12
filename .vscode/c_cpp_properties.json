@@ -22,7 +22,8 @@
                 "/home/keisuke/pick_and_place/src/pick_and_place/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
                 "/usr/include/**",
                 "/opt/ros/noetic/include",
-                "/usr/include/eigen3"
+                "/usr/include/eigen3",
+                "${workspaceFolder}/pick_and_place/include"
             ],
             "name": "ROS"
         }

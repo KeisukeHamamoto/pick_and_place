@@ -33,49 +33,6 @@ void manipulator_node::move_point(const geometry_msgs::Point::ConstPtr& image_po
     const double eef_step = 0.01;
     double fraction = move_group->computeCartesianPath(waypoints, eef_step, jump_thresold, trajectory);
     move_group->execute(trajectory);
-
-    // std::vector<moveit_msgs::Grasp> grasps;
-    // moveit_msgs::Grasp g;
-
-    // g.grasp_pose.header.frame_id = move_group->getPlanningFrame();
-    // g.grasp_pose.pose.position.x = image_point->x;
-    // g.grasp_pose.pose.position.y = image_point->y;
-    // g.grasp_pose.pose.position.z = image_point->z;
-    // g.grasp_pose.pose.orientation.x = 0.0;
-    // g.grasp_pose.pose.orientation.y = 0.707106;
-    // g.grasp_pose.pose.orientation.z = 0.0;
-    // g.grasp_pose.pose.orientation.w = 0.707106;
-
-    // g.pre_grasp_approach.direction.header.frame_id = move_group->getPlanningFrame();
-    // g.pre_grasp_approach.direction.vector.z = -1;
-    // g.pre_grasp_approach.min_distance = 0.05;
-    // g.pre_grasp_approach.desired_distance = 0.07;
-
-    // g.post_grasp_retreat.direction.header.frame_id = arm_.getPlanningFrame();
-    // g.post_grasp_retreat.direction.vector.z = 1;
-    // g.post_grasp_retreat.min_distance = 0.05;
-    // g.post_grasp_retreat.desired_distance = 0.07;
-
-    // g.pre_grasp_posture.joint_names.resize(1, "crane_plus_moving_finger_joint");
-    // g.pre_grasp_posture.points.resize(1);
-    // g.pre_grasp_posture.points[0].positions.resize(1);
-    // g.pre_grasp_posture.points[0].positions[0] = 0.1;
-
-    // g.grasp_posture.joint_names.resize(1, "crane_plus_moving_finger_joint");
-    // g.grasp_posture.points.resize(1);
-    // g.grasp_posture.points[0].positions.resize(1);
-    // g.grasp_posture.points[0].positions[0] = 0.01;
-
-    // grasps.push_back(g);
-    // arm_.setSupportSurfaceName("table");
-    // ROS_INFO("Beginning pick");
-    // if (!arm_.pick("sponge", grasps)) {
-    //   ROS_WARN("Pick failed");
-    //   return false;
-    // }
-    // ROS_INFO("Pick complete");
-    // return true;
-
 }
 
 // void manipulator_node::move_start()

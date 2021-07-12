@@ -16,6 +16,7 @@
         <joint name="wrist_1_joint"/>
         <joint name="wrist_2_joint"/>
         <joint name="wrist_3_joint"/>
+        <chain base_link="base_link" tip_link="wrist_3_link"/>
     </group>
     <group name="gripper">
         <joint name="finger1_joint"/>
@@ -24,19 +25,16 @@
     <group_state name="arm_home" group="arm">
         <joint name="elbow_joint" value="0"/>
         <joint name="shoulder_lift_joint" value="-1.5"/>
-        <joint name="shoulder_pan_joint" value="-1.5"/>
+        <joint name="shoulder_pan_joint" value="0"/>
         <joint name="wrist_1_joint" value="0"/>
         <joint name="wrist_2_joint" value="0"/>
-        <joint name="wrist_3_joint" value="1.5"/>
+        <joint name="wrist_3_joint" value="0"/>
     </group_state>
     <group_state name="gripper_home" group="gripper">
         <joint name="finger1_joint" value="0"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="endeffector" parent_link="wrist_3_link" group="gripper" parent_group="arm"/>
-    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="virtual_world_joint" type="fixed" parent_frame="world" child_link="pedestal_link"/>
-    <virtual_joint name="virtual_pedestal_joint" type="fixed" parent_frame="pedestal_link" child_link="base_link"/>
+    <end_effector name="gripper" parent_link="wrist_3_link" group="gripper" parent_group="arm"/>
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="finger2_joint"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->

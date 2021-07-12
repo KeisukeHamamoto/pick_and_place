@@ -1,6 +1,6 @@
 <package>
 
-  <name>ur3_robotiq_moveit_config</name>
+  <name>ur3robotiq_moveit_config</name>
   <version>0.3.0</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the ur3e_gripper with the MoveIt Motion Planning Framework

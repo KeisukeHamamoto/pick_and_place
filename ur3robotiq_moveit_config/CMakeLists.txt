@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1.3)
-project(ur3_robotiq_moveit_config)
+project(ur3robotiq_moveit_config)
 
 find_package(catkin REQUIRED)
 
