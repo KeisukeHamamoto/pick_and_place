@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
    <arg name="model" default="$(find pick_and_place)/urdf/ur3_camera.urdf.xacro"/> 
-   <arg name="limited" default="true" doc="If true, limits joint range [-PI, PI] on all joints." />
+   <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
    <arg name="paused" default="false" doc="Starts gazebo in paused mode" />
    <arg name="gui" default="true" doc="Starts gazebo gui" />
 
@@ -12,9 +12,12 @@
    </include>
 
    <!-- send robot urdf to param server -->
-  <include file="$(find pick_and_place)/launch/ur3_camera_uprode.launch">
+  <include file="$(find pick_and_place)/launch/ur3_camera_uprode_v2.launch">
     <arg name="limited" value="$(arg limited)"/>
   </include>
+
+  <rosparam file="$(find pick_and_place)/config/ur3e_gripper.yaml" command="load"/>
+    <node pkg="controller_manager" type="controller_manager" name="ros_controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper"/>
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot" respawn="false" output="screen" />
@@ -38,4 +41,5 @@
   <node pkg="gazebo_ros" type="spawn_model" name="desk" args="-file $(find pick_and_place)/urdf/desk_v2.urdf.xacro -urdf -model desk -x 0.3 -y 0.0 -z 0.0"/>
   <!-- spawn the redbox in gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" name="redbox" args="-file $(find pick_and_place)/urdf/redbox_v2.urdf.xacro -urdf -model redbox -x 0.3 -y -0.1 -z 0.5"/>
+
 </launch>

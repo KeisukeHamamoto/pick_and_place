@@ -19,8 +19,8 @@ void camera_node::parameter_set()
 
 void camera_node::operate()
 {
-    operate_pub_ =nh_.advertise<sensor_msgs::Image>(output_topic_name_,10);
-    image_point_pub_ = nh.advertise<geometry_msgs::Point>("/image_point",10);
+    operate_pub_ =nh_.advertise<sensor_msgs::Image>(output_topic_name_,1000);
+    image_point_pub_ = nh.advertise<geometry_msgs::Point>("/image_point",1000);
     camera_sub_ = new message_filters::Subscriber<sensor_msgs::CameraInfo>(nh_, camera_topic_name_, 10);
     image_sub_ = new message_filters::Subscriber<sensor_msgs::Image>(nh_, image_topic_name_, 10);
     sensor_sync_ = new message_filters::Synchronizer<Sync_type>(Sync_type(10), *camera_sub_, *image_sub_);
@@ -161,7 +161,7 @@ void camera_node::pixel_to_world(cv::Point2f pixcel)
     ROS_INFO_STREAM("world.x:" << camera_to_world[0][0] << "world.y:" << camera_to_world[1][0] << "world.z:" << camera_to_world[2][0]);
     float i_x = camera_to_world[0][0];
     float i_y = camera_to_world[1][0];
-    float i_z = camera_to_world[2][0] + 0.3;
+    float i_z = camera_to_world[2][0] + 0.5;
 
     image_point.x = i_x;
     image_point.y = i_y;

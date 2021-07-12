@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-   <arg name="model" default="$(find pick_and_place)/urdf/ur3_camera.urdf.xacro"/> 
+   <arg name="model" default="$(find pick_and_place)/urdf/ur3_camera_origin.urdf.xacro"/> 
    <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
    <arg name="paused" default="false" doc="Starts gazebo in paused mode" />
    <arg name="gui" default="true" doc="Starts gazebo gui" />
@@ -10,9 +10,6 @@
     <arg name="paused" value="$(arg paused)"/> 
     <arg name="gui" value="$(arg gui)"/>
    </include>
-
-   <rosparam file="$(find pick_and_place)/config/ur3e_gripper.yaml" command="load"/>
-    <node pkg="controller_manager" type="controller_manager" name="ros_controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper"/>
 
    <!-- send robot urdf to param server -->
   <include file="$(find pick_and_place)/launch/ur3_camera_uprode.launch">
@@ -42,15 +39,4 @@
   <!-- spawn the redbox in gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" name="redbox" args="-file $(find pick_and_place)/urdf/redbox_v2.urdf.xacro -urdf -model redbox -x 0.3 -y -0.1 -z 0.6"/>
 
-  <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-        <param name="publish_frequency" type="double" value="50.0" />
-        <param name="tf_prefix" type="string" value="" />
-    </node> -->
-
-    <!-- <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
-            args="pub /calibrated std_msgs/Bool true" /> -->
-    
-    <!-- joint_state_controller -->
-    <!-- <rosparam file="$(find arm_and_gripper)/config/joint_state_controller.yaml" command="load"/>
-    <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/> -->
 </launch>
