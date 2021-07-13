@@ -19,8 +19,8 @@ void camera_node::parameter_set()
 
 void camera_node::operate()
 {
-    operate_pub_ =nh_.advertise<sensor_msgs::Image>(output_topic_name_,1000);
-    image_point_pub_ = nh.advertise<geometry_msgs::Point>("/image_point",1000);
+    operate_pub_ =nh_.advertise<sensor_msgs::Image>(output_topic_name_,10);
+    image_point_pub_ = nh.advertise<geometry_msgs::Point>("/image_point",10);
     camera_sub_ = new message_filters::Subscriber<sensor_msgs::CameraInfo>(nh_, camera_topic_name_, 10);
     image_sub_ = new message_filters::Subscriber<sensor_msgs::Image>(nh_, image_topic_name_, 10);
     sensor_sync_ = new message_filters::Synchronizer<Sync_type>(Sync_type(10), *camera_sub_, *image_sub_);

@@ -13,7 +13,7 @@ manipulator_node::manipulator_node(std::string group_name)
 {
     // move_start();
     move_group = new moveit::planning_interface::MoveGroupInterface(group_name);
-    sub_ = nh.subscribe("/image_point", 1000, &manipulator_node::move_point, this);
+    sub_ = nh.subscribe("/image_point", 10, &manipulator_node::move_point, this);
 }
 
 void manipulator_node::move_point(const geometry_msgs::Point::ConstPtr& image_point)

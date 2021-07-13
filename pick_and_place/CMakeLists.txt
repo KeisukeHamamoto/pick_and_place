@@ -234,3 +234,8 @@ add_executable(arm_test src/arm_test_class.cpp src/arm_test.cpp)
 target_link_libraries(arm_test
     ${catkin_LIBRARIES}
 )
+
+add_executable(trajectory_move src/trajectory_move.cpp)
+target_link_libraries(trajectory_move
+    ${catkin_LIBRARIES}
+)
