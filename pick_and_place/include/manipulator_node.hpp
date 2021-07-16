@@ -17,6 +17,7 @@ class manipulator_node
 {
 public:
     void move_point(const geometry_msgs::Point::ConstPtr& image_point);
+    void multiple_matrix(std::vector<std::vector<float> > Matrix_1, std::vector<std::vector<float> > Matrix_2, std::vector<std::vector<float> > &ans);
     void move_start();
     manipulator_node(std::string);
     moveit::planning_interface::MoveGroupInterface *move_group;

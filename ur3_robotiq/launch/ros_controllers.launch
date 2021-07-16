@@ -7,5 +7,10 @@
   <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" args=""/>
+  <!-- <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" ns="move_group" output="screen"
+          args="namespace=move_group
+          joint_state_controller
+          arm_controller
+          timeout 20"/> -->
 
 </launch>

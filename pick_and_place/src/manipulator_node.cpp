@@ -8,6 +8,7 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <manipulator_node.hpp>
 #include <geometry_msgs/Point.h>
+#include <math.h>
 
 manipulator_node::manipulator_node(std::string group_name)
 {
@@ -23,10 +24,39 @@ void manipulator_node::move_point(const geometry_msgs::Point::ConstPtr& image_po
     wpose.position.x = image_point->x;
     wpose.position.y = image_point->y;
     wpose.position.z = image_point->z;
-    wpose.orientation.x = 0.0;
-    wpose.orientation.y = 0.707106;
-    wpose.orientation.z = 0.0;
-    wpose.orientation.w = 0.707106;
+    // wpose.orientation.x = 0.0;
+    // wpose.orientation.y = 0.0;
+    // wpose.orientation.z = 0.707106;
+    // wpose.orientation.w = 0.707106;
+    float roll = M_PI;
+    float pich = M_PI_2;
+    float yaw = M_PI_2;
+    std::vector<std::vector<float> > x;
+    x = {{cos(roll/2)},
+         {sin(roll/2)},
+         {0.0},
+         {0.0}};
+    std::vector<std::vector<float> > y;
+    y = {{cos(pich/2)},
+         {0.0},
+         {sin(pich/2)},
+         {0.0}};
+    std::vector<std::vector<float> > z;
+    z = {{cos(yaw/2)},
+         {0.0},
+         {0.0},
+         {sin(yaw/2)}};
+    std::vector<std::vector<float> > rpy;
+    rpy = {{0.0},
+           {0.0},
+           {0.0},
+           {0.0}};
+
+    multiple_matrix(x, z, rpy);
+    wpose.orientation.x = rpy[1][0];
+    wpose.orientation.y = rpy[2][0];
+    wpose.orientation.z = rpy[3][0];
+    wpose.orientation.w = rpy[0][0];
     waypoints.push_back(wpose);
     moveit_msgs::RobotTrajectory trajectory;
     const double jump_thresold = 0.0;
@@ -35,26 +65,13 @@ void manipulator_node::move_point(const geometry_msgs::Point::ConstPtr& image_po
     move_group->execute(trajectory);
 }
 
-// void manipulator_node::move_start()
-// {
-//     ros::Publisher pub;
-//     pub = nh.advertise<trajectory_msgs::JointTrajectory>("/arm_controller/command", 10);
-//     trajectory_msgs::JointTrajectoryPoint joint_value;
-//     joint_value.positions.push_back(-PI/2);
-//     joint_value.positions.push_back(-PI/2);
-//     joint_value.positions.push_back(-PI/5);
-//     joint_value.positions.push_back(-2*PI/3);
-//     joint_value.positions.push_back(PI/2);
-//     joint_value.positions.push_back(-PI/2);
-
-//     trajectory_msgs::JointTrajectory joint;
-//     joint.joint_names = { "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" };
-
-//     joint.header.stamp = ros::Time::now();
-
-//     ros::Rate loop(10);
-//     while (ros::ok()) {
-//         pub.publish(joint);
-//         loop.sleep();
-//     }
-// }
+void manipulator_node::multiple_matrix(std::vector<std::vector<float> > Matrix_1, std::vector<std::vector<float> > Matrix_2, std::vector<std::vector<float> > &ans)
+{
+    for (int i = 0; i < Matrix_1.size(); i++){
+        for (int j = 0; j < Matrix_2[i].size(); j++){
+            for(int k = 0; k < Matrix_2.size(); k++){
+                ans[i][j] += Matrix_1[i][k] * Matrix_2[k][j];
+            }
+        }
+    }
+}
