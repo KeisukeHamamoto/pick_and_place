@@ -20,9 +20,9 @@ int main(int argc, char **argv){
     // ros::shutdown();
 
     geometry_msgs::Point image_point;
-    image_point.x = 0.30;
-    image_point.y = -0.1;
-    image_point.z = 0.6;
+    image_point.x = 0.00;
+    image_point.y = 0.00;
+    image_point.z = 1.50;
 
     mn.move_point(image_point);
 }

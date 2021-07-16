@@ -19,8 +19,8 @@ manipulator_node::manipulator_node(std::string group_name)
 void manipulator_node::move_point(geometry_msgs::Point image_point)
 {
     std::vector<geometry_msgs::Pose> waypoints;
-    // geometry_msgs::Pose wpose = move_group->getCurrentPose().pose;
-    geometry_msgs::Pose wpose;
+    geometry_msgs::Pose wpose = move_group->getCurrentPose().pose;
+    // geometry_msgs::Pose wpose;
     wpose.position.x = image_point.x;
     wpose.position.y = image_point.x;
     wpose.position.z = image_point.z;

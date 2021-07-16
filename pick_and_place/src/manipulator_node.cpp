@@ -75,3 +75,21 @@ void manipulator_node::multiple_matrix(std::vector<std::vector<float> > Matrix_1
         }
     }
 }
+
+void manipulator_node::move_start()
+{
+    std::vector<geometry_msgs::Pose> home_pose;
+    geometry_msgs::Pose home = move_group->getCurrentPose().pose;
+    home.position.x = 0.0;
+    home.position.y = 0.0;
+    home.position.z = 1.2;
+    // home.orientation.x = 0.0;
+    // home.orientation.y = 0.0;
+    // home.orientation.z = 0.707106;
+    // home.orientation.w = 0.707106;
+    moveit_msgs::RobotTrajectory trajectory;
+    const double jump_thresold = 0.0;
+    const double eef_step = 0.01;
+    double fraction = move_group->computeCartesianPath(home_pose, eef_step, jump_thresold, trajectory);
+    move_group->execute(trajectory);
+}
