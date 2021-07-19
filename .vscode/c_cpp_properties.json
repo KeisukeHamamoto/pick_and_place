@@ -23,7 +23,8 @@
                 "/usr/include/**",
                 "/opt/ros/noetic/include",
                 "/usr/include/eigen3",
-                "${workspaceFolder}/pick_and_place/include"
+                "${workspaceFolder}/pick_and_place/include",
+                "${workspaceFolder}/pick_and_place_2/include"
             ],
             "name": "ROS"
         }
