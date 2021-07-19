@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   actionlib
   trajectory_msgs
+  tf2_geometry_msgs
 )
 find_package(OpenCV REQUIRED)
 ## System dependencies are found with CMake's conventions
@@ -239,3 +240,7 @@ add_executable(trajectory_move src/trajectory_move.cpp)
 target_link_libraries(trajectory_move
     ${catkin_LIBRARIES}
 )
+
+
+add_executable(pick_place_tutorial src/manipulator_node_v2.cpp)
+target_link_libraries(pick_place_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
