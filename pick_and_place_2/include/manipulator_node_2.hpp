@@ -3,10 +3,12 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <actionlib/client/simple_action_client.h>
+#include <control_msgs/GripperCommandAction.h>
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/Pose2D.h>
 #include <moveit_msgs/CollisionObject.h>
-#include <control_msgs/GripperCommandAction.h>
+#include <moveit_msgs/Grasp.h>
+#include <shape_msgs/SolidPrimitive.h>
 
 #include <string>
 #include <vector>
@@ -14,8 +16,12 @@
 class PickNPlacer {
     public:
         explicit PickNPlacer(ros::NodeHandle& node_handle);
+        void DoPickAndPlace(geometry_msgs::Point::ConstPtr const &msg);
         void SetupPlanningScene();
-        bool DoPick(geometry_msgs::Pose2D::ConstPtr const& msg);
+        void AddBoxToScene(geometry_msgs::Point::ConstPtr const& msg);
+        void RemoveBoxFromScene();
+        bool DoPick(geometry_msgs::Point::ConstPtr const& msg);
+        bool DoPlace();
 
     private:
     //Planning interface for the manipulator
@@ -26,5 +32,6 @@ class PickNPlacer {
     actionlib::SimpleActionClient<control_msgs::GripperCommandAction> gripper_;
     //Object to manage the planning scene
     moveit::planning_interface::PlanningSceneInterface scene_;
-    std::string scene_task_frame_;
+
+    ros::Subscriber sub_;
 };

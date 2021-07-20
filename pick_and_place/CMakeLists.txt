@@ -128,6 +128,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
+  # ${system_lib_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -241,6 +242,7 @@ target_link_libraries(trajectory_move
     ${catkin_LIBRARIES}
 )
 
-
-add_executable(pick_place_tutorial src/manipulator_node_v2.cpp)
-target_link_libraries(pick_place_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_executable(set_move src/set_move.cpp)
+target_link_libraries(set_move
+    ${catkin_LIBRARIES}
+)
