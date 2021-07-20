@@ -13,7 +13,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry>
-          <box size="0.065 0.065 0.02"/>
+          <box size="0.03 0.03 0.02"/>
         </geometry>
         <material name="red">
           
@@ -22,7 +22,7 @@
       <collision>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry>
-          <box size="0.065 0.065 0.02"/>
+          <box size="0.03 0.03 0.02"/>
         </geometry>
       </collision>
       <inertial>

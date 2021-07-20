@@ -8,7 +8,7 @@ PickNPlacer::PickNPlacer(ros::NodeHandle& node_handle)
             gripper_.waitForServer();
 
             // Initialise the planning scene with known objects
-            // SetupPlanningScene();
+            SetupPlanningScene();
             // Start by moving to the home pose
             manipulator_.setNamedTarget("home");
             manipulator_.move();
@@ -51,7 +51,7 @@ void PickNPlacer::SetupPlanningScene()
     geometry_msgs::Pose pose;
     pose.position.x = 0.3;
     pose.position.y = 0.0;
-    pose.position.z = 0.0;
+    pose.position.z = -0.3;
     pose.orientation.w = 1.0;
     table.primitives.push_back(primitive);
     table.primitive_poses.push_back(pose);
@@ -75,13 +75,13 @@ void PickNPlacer::AddBoxToScene(geometry_msgs::Point::ConstPtr const& msg)
     shape_msgs::SolidPrimitive primitive;
     primitive.type = primitive.BOX;
     primitive.dimensions.resize(3);
-    primitive.dimensions[0] = 0.065;
-    primitive.dimensions[1] = 0.065;
+    primitive.dimensions[0] = 0.03;
+    primitive.dimensions[1] = 0.03;
     primitive.dimensions[2] = 0.02;
     geometry_msgs::Pose pose;
     pose.position.x = msg->x;
     pose.position.y = msg->y;
-    pose.position.z = msg->z;
+    pose.position.z = -0.1;
     pose.orientation.w = 1.0;
     redbox.primitives.push_back(primitive);
     redbox.primitive_poses.push_back(pose);
@@ -105,8 +105,8 @@ bool PickNPlacer::DoPick(geometry_msgs::Point::ConstPtr const& msg)
     g.grasp_pose.header.frame_id = manipulator_.getPlanningFrame();
     g.grasp_pose.pose.position.x = msg->x;
     g.grasp_pose.pose.position.y = msg->y;
-    g.grasp_pose.pose.position.z = msg->z;
-    g.grasp_pose.pose.orientation.w = 1.0;
+    g.grasp_pose.pose.position.z = msg->z + 0.1;
+    g.grasp_pose.pose.orientation.w = 1;
 
     g.pre_grasp_approach.direction.header.frame_id = manipulator_.getPlanningFrame();
     g.pre_grasp_approach.direction.vector.z = -1;
