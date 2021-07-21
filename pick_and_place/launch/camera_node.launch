@@ -4,9 +4,11 @@
     <arg name="image_topic_name" default="/camera/image_raw"/>
     <arg name="camera_topic_name" default="/camera/camera_info"/>
     
-    <node name="node_name" pkg="pick_and_place" type="camera_node" output="screen">
+    <node name="node_name" pkg="pick_and_place" type="camera_node">
         <param name="camera_topic_name" value="$(arg camera_topic_name)"/>
         <param name="image_topic_name" value="$(arg image_topic_name)"/>
         <param name="output_topic_name" value="$(arg output_topic_name)"/>
     </node>
+
+    <node pkg="pick_and_place_2" type="pick_and_place_2" name="pick_and_place_2" output="screen"/>
 </launch>

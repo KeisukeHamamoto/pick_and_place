@@ -42,6 +42,6 @@
   <!-- spawn the desk in gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" name="desk" args="-file $(find pick_and_place)/urdf/desk_v2.urdf.xacro -urdf -model desk -x 0.3 -y 0.0 -z 0.0"/>
   <!-- spawn the redbox in gazebo -->
-  <node pkg="gazebo_ros" type="spawn_model" name="redbox" args="-file $(find pick_and_place)/urdf/redbox_v2.urdf.xacro -urdf -model redbox -x 0.4 -y -0.1 -z 0.5"/>
+  <node pkg="gazebo_ros" type="spawn_model" name="redbox" args="-file $(find pick_and_place)/urdf/redbox_v2.urdf.xacro -urdf -model redbox -x 0.3 -y -0.1 -z 0.6"/>
 
 </launch>

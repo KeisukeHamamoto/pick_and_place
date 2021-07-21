@@ -32,6 +32,7 @@ class PickNPlacer {
     actionlib::SimpleActionClient<control_msgs::GripperCommandAction> gripper_;
     //Object to manage the planning scene
     moveit::planning_interface::PlanningSceneInterface scene_;
+    std::string scene_task_frame_;
 
     ros::Subscriber sub_;
 };

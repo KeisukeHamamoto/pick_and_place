@@ -4,6 +4,11 @@ PickNPlacer::PickNPlacer(ros::NodeHandle& node_handle)
     :   manipulator_("manipulator"),
         gripper_group_("gripper"),
         gripper_("/gripper/gripper_cmd", "true"){
+            ros::param::param<std::string>(
+                "~task_frame",
+                scene_task_frame_,
+                "base_link"
+            );
             manipulator_.setPoseReferenceFrame("base_link");
             gripper_.waitForServer();
 
@@ -75,13 +80,13 @@ void PickNPlacer::AddBoxToScene(geometry_msgs::Point::ConstPtr const& msg)
     shape_msgs::SolidPrimitive primitive;
     primitive.type = primitive.BOX;
     primitive.dimensions.resize(3);
-    primitive.dimensions[0] = 0.03;
-    primitive.dimensions[1] = 0.03;
-    primitive.dimensions[2] = 0.02;
+    primitive.dimensions[0] = 0.035;
+    primitive.dimensions[1] = 0.035;
+    primitive.dimensions[2] = 0.06;
     geometry_msgs::Pose pose;
     pose.position.x = msg->x;
     pose.position.y = msg->y;
-    pose.position.z = -0.1;
+    pose.position.z = -0.075;
     pose.orientation.w = 1.0;
     redbox.primitives.push_back(primitive);
     redbox.primitive_poses.push_back(pose);
@@ -98,6 +103,7 @@ void PickNPlacer::RemoveBoxFromScene()
     objs.push_back("redbox");
     scene_.removeCollisionObjects(objs);
 }
+
 bool PickNPlacer::DoPick(geometry_msgs::Point::ConstPtr const& msg)
 {
     std::vector<moveit_msgs::Grasp> grasps;
@@ -105,24 +111,25 @@ bool PickNPlacer::DoPick(geometry_msgs::Point::ConstPtr const& msg)
     g.grasp_pose.header.frame_id = manipulator_.getPlanningFrame();
     g.grasp_pose.pose.position.x = msg->x;
     g.grasp_pose.pose.position.y = msg->y;
-    g.grasp_pose.pose.position.z = msg->z + 0.1;
-    g.grasp_pose.pose.orientation.w = 1;
+    g.grasp_pose.pose.position.z = msg->z + 0.16;
+    g.grasp_pose.pose.orientation.y = sin(M_PI/2);
+    g.grasp_pose.pose.orientation.w = cos(M_PI/2);
 
     g.pre_grasp_approach.direction.header.frame_id = manipulator_.getPlanningFrame();
     g.pre_grasp_approach.direction.vector.z = -1;
     g.pre_grasp_approach.min_distance = 0.05;
-    g.pre_grasp_approach.desired_distance = 0.07;
+    g.pre_grasp_approach.desired_distance = 0.051;
 
     g.post_grasp_retreat.direction.header.frame_id = manipulator_.getPlanningFrame();
     g.post_grasp_retreat.direction.vector.z = 1;
-    g.post_grasp_retreat.min_distance = 0.05;
-    g.post_grasp_retreat.desired_distance = 0.07;
+    g.post_grasp_retreat.min_distance = 0.04;
+    g.post_grasp_retreat.desired_distance = 0.046;
 
     //grasping
     g.pre_grasp_posture.joint_names.resize(1, "finger1_joint");
     g.pre_grasp_posture.points.resize(1);
     g.pre_grasp_posture.points[0].positions.resize(1);
-    g.pre_grasp_posture.points[0].positions[0] = 0.1;
+    g.pre_grasp_posture.points[0].positions[0] = 0.0;
 
     g.grasp_posture.joint_names.resize(1, "finger1_joint");
     g.grasp_posture.points.resize(1);
@@ -148,7 +155,7 @@ bool PickNPlacer::DoPlace()
     moveit_msgs::PlaceLocation p;
     p.place_pose.header.frame_id = manipulator_.getPlanningFrame();
     p.place_pose.pose.position.x = 0.0;
-    p.place_pose.pose.position.y = 0.3;
+    p.place_pose.pose.position.y = 0.4;
     p.place_pose.pose.position.z = 0.4;
     p.place_pose.pose.orientation.w = 1.0;
 
@@ -160,12 +167,12 @@ bool PickNPlacer::DoPlace()
     p.post_place_posture.joint_names.resize(1, "finger1_joint");
     p.post_place_posture.points.resize(1);
     p.post_place_posture.points[0].positions.resize(1);
-    p.post_place_posture.points[0].positions[0] = 0.1;
+    p.post_place_posture.points[0].positions[0] = 0.005;
 
     location.push_back(p);
 
     manipulator_.setSupportSurfaceName("table");
-    ROS_INFO_STREAM("Befinning place");
+    ROS_INFO_STREAM("Beginning place");
 
     manipulator_.place("redbox", location);
     ROS_INFO_STREAM("Place done");
