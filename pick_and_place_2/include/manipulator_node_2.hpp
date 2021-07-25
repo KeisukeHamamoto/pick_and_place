@@ -20,6 +20,7 @@ class PickNPlacer {
         void SetupPlanningScene();
         void AddBoxToScene(geometry_msgs::Point::ConstPtr const& msg);
         void RemoveBoxFromScene();
+        void MoveManipulator();
         bool DoPick(geometry_msgs::Point::ConstPtr const& msg);
         bool DoPlace();
 

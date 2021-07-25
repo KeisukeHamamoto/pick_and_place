@@ -151,12 +151,14 @@ bool PickNPlacer::DoPick(geometry_msgs::Point::ConstPtr const& msg)
 
 bool PickNPlacer::DoPlace()
 {
+    // MoveManipulator();
+
     std::vector<moveit_msgs::PlaceLocation> location;
     moveit_msgs::PlaceLocation p;
     p.place_pose.header.frame_id = manipulator_.getPlanningFrame();
     p.place_pose.pose.position.x = 0.0;
     p.place_pose.pose.position.y = 0.4;
-    p.place_pose.pose.position.z = 0.4;
+    p.place_pose.pose.position.z = 0.3;
     p.place_pose.pose.orientation.w = 1.0;
 
     p.pre_place_approach.direction.header.frame_id = manipulator_.getPlanningFrame();
@@ -167,7 +169,7 @@ bool PickNPlacer::DoPlace()
     p.post_place_posture.joint_names.resize(1, "finger1_joint");
     p.post_place_posture.points.resize(1);
     p.post_place_posture.points[0].positions.resize(1);
-    p.post_place_posture.points[0].positions[0] = 0.005;
+    p.post_place_posture.points[0].positions[0] = 0.004;
 
     location.push_back(p);
 
@@ -177,4 +179,23 @@ bool PickNPlacer::DoPlace()
     manipulator_.place("redbox", location);
     ROS_INFO_STREAM("Place done");
     return true;
+}
+
+void PickNPlacer::MoveManipulator()
+{
+    std::vector<geometry_msgs::Pose> waypoints;
+    geometry_msgs::Pose wpose = manipulator_.getCurrentPose().pose;
+    wpose.position.x = 0.3;
+    wpose.position.y = 0.0;
+    wpose.position.z = 0.4;
+    wpose.orientation.x = 0.0;
+    wpose.orientation.y = 0.707106;
+    wpose.orientation.z = 0.0;
+    wpose.orientation.w = 0.707106;
+    waypoints.push_back(wpose);
+    moveit_msgs::RobotTrajectory trajectory;
+    const double jump_thresold = 0.0;
+    const double eef_step = 0.01;
+    double fraction = manipulator_.computeCartesianPath(waypoints, eef_step, jump_thresold, trajectory);
+    manipulator_.execute(trajectory);
 }
